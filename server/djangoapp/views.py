@@ -92,9 +92,7 @@ def get_dealerships(request, state="All"):
         endpoint = "/fetchDealers"
     else:
         endpoint = "/fetchDealers/"+state
-    print(f"dealerships:{endpoint}")
     dealerships = get_request(endpoint)
-    print (f"Recieved dealerships {dealerships}")
     return JsonResponse({"status":200,"dealers":dealerships})
 
 # Create a `get_dealer_reviews` view to render the reviews of a dealer
@@ -117,7 +115,7 @@ def get_dealer_details(request, dealer_id):
     if not dealer_id:
         return JsonResponse({"status":400, "message":"Bad Request"})
     dealerDetails = get_request(endpoint)
-    return JsonResponse({"status":200, "dealer":dealerDetails})
+    return JsonResponse({"status":200, "dealer":dealerDetails[0]})
 
 # Create a `add_review` view to submit a review
 def add_review(request):
